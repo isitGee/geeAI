@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeeAI — Your AI. Your workspace.</title>
+  <meta name="description" content="GeeAI is a clean, focused workspace for working with AI — code, ideas, and answers in one place." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Overlay shown behind the sidebar on mobile when it's open -->
+    <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar" aria-label="Conversation sidebar">
+
+      <div class="sidebar-top">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">G</span>
+          <span class="brand-name">GeeAI</span>
+        </div>
+
+        <button class="new-chat-btn" id="newChatBtn" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New chat</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-history" aria-label="Recent conversations">
+        <p class="sidebar-section-title">Recent</p>
+        <ul class="history-list" id="historyList">
+          <li><button class="history-item" type="button">Subnetting help</button></li>
+          <li><button class="history-item" type="button">Portfolio ideas</button></li>
+          <li><button class="history-item" type="button">Linux troubleshooting</button></li>
+          <li><button class="history-item" type="button">Java assignment</button></li>
+          <li><button class="history-item" type="button">Resume feedback</button></li>
+          <li><button class="history-item" type="button">React state bug</button></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="sidebar-bottom-btn" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.19.36.51.63.9.72.19.05.39.08.6.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+        <button class="sidebar-bottom-btn" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Profile</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- ============ CHAT AREA ============ -->
+    <div class="chat-area">
+
+      <header class="chat-header">
+        <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Open sidebar" aria-expanded="false" aria-controls="sidebar">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="header-title">
+          <span class="header-logo" aria-hidden="true">G</span>
+          <span class="header-name">GeeAI</span>
+        </div>
+
+        <div class="header-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Online</span>
+        </div>
+      </header>
+
+      <main class="chat-main" id="chatMain">
+
+        <!-- Welcome / empty state -->
+        <section class="welcome-screen" id="welcomeScreen" aria-label="Welcome">
+          <div class="welcome-logo" aria-hidden="true">G</div>
+          <h1 class="welcome-heading">How can I help you?</h1>
+          <p class="welcome-subtext">Ask GeeAI anything. Code, networking, design, ideas and more.</p>
+
+          <div class="suggestions" id="suggestions">
+            <button class="suggestion-card" type="button" data-prompt="Write a function that reverses a linked list">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <span>Write some code</span>
+            </button>
+
+            <button class="suggestion-card" type="button" data-prompt="Explain subnetting like I'm new to networking">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span>Explain subnetting</span>
+            </button>
+
+            <button class="suggestion-card" type="button" data-prompt="Give me some fresh design ideas for a portfolio site">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="13.5" cy="6.5" r="1.5"></circle>
+                <circle cx="17.5" cy="10.5" r="1.5"></circle>
+                <circle cx="8.5" cy="7.5" r="1.5"></circle>
+                <circle cx="6.5" cy="12.5" r="1.5"></circle>
+                <path d="M12 2a10 10 0 0 0 0 20 2.5 2.5 0 0 0 2.5-2.5c0-.6-.3-1.2-.7-1.6a2 2 0 0 1-.3-1.1c0-1.1.9-2 2-2h1.5A4.5 4.5 0 0 0 21.5 10 9.9 9.9 0 0 0 12 2z"></path>
+              </svg>
+              <span>Design ideas</span>
+            </button>
+
+            <button class="suggestion-card" type="button" data-prompt="Help me debug why my code isn't working">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="6" y="8" width="12" height="10" rx="4"></rect>
+                <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+                <line x1="2" y1="13" x2="6" y2="13"></line>
+                <line x1="18" y1="13" x2="22" y2="13"></line>
+                <line x1="3" y1="19" x2="6.5" y2="17"></line>
+                <line x1="17.5" y1="17" x2="21" y2="19"></line>
+              </svg>
+              <span>Debug my code</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Message thread -->
+        <div class="messages" id="messages" role="log" aria-live="polite" aria-label="Conversation" hidden></div>
+
+      </main>
+
+      <div class="composer-wrap">
+        <form class="composer" id="composerForm">
+          <label for="messageInput" class="visually-hidden">Message GeeAI</label>
+          <textarea
+            id="messageInput"
+            class="composer-input"
+            placeholder="Message GeeAI..."
+            rows="1"
+            aria-label="Message GeeAI"
+          ></textarea>
+          <button type="submit" class="send-btn" id="sendBtn" aria-label="Send message" disabled>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="6 11 12 5 18 11"></polyline>
+            </svg>
+          </button>
+        </form>
+        <p class="composer-hint">GeeAI can make mistakes. Consider checking important information.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

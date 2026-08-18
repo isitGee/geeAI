@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeeAI</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="brand">
+            <div class="brand-icon">G</div>
+            <span>GeeAI</span>
+          </div>
+
+          <button class="new-chat" id="newChatBtn">
+            <span>＋</span>
+            New chat
+          </button>
+        </div>
+
+        <div class="chat-history">
+          <p class="history-title">Recent</p>
+
+          <div class="chat-item active">
+            <span>💬</span>
+            <span class="chat-title">New conversation</span>
+          </div>
+        </div>
+
+        <div class="sidebar-bottom">
+          <button class="sidebar-btn">
+            ⚙️
+            <span>Settings</span>
+          </button>
+
+          <button class="sidebar-btn">
+            👤
+            <span>Profile</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Chat -->
+      <main class="chat">
+        <!-- Header -->
+        <header class="chat-header">
+          <button class="mobile-menu" id="mobileMenu">☰</button>
+
+          <div>
+            <h2>GeeAI</h2>
+            <span class="status">
+              <span class="status-dot"></span>
+              Online
+            </span>
+          </div>
+        </header>
+
+        <!-- Messages -->
+        <section class="messages" id="messages">
+          <div class="welcome">
+            <div class="welcome-icon">G</div>
+
+            <h1>How can I help you?</h1>
+
+            <p>Ask GeeAI anything. Code, networking, design, ideas and more.</p>
+          </div>
+        </section>
+
+        <!-- Input Area -->
+        <div class="input-container">
+          <form class="message-form" id="messageForm">
+            <textarea
+              id="messageInput"
+              placeholder="Message GeeAI..."
+              rows="1"
+            ></textarea>
+
+            <button type="submit" id="sendBtn">➤</button>
+          </form>
+
+          <p class="disclaimer">
+            GeeAI can make mistakes. Check important information.
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
