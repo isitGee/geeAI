@@ -1,0 +1,29 @@
+# Secrets — never commit these
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Vercel / build output
+.vercel
+.output
+dist/
+build/
+
+# Local tooling
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/settings.json
