@@ -127,6 +127,30 @@ Defined once in `style.css` under `:root` (light) and `[data-theme='dark']`.
 * Hint text below is 12px `--color-text-muted`, centred.
 * Bottom padding respects `env(safe-area-inset-bottom)`.
 
+### Model Switcher (topbar)
+* A native `<select>` styled as a pill: height 26px (28px on mobile), radius
+  `--radius-pill`, 1px `--color-border`, `--color-surface` background,
+  `--font-mono` at `--fs-caption`, `--color-text-secondary` label.
+* Trailing chevron (13px) is absolutely positioned and `pointer-events: none`.
+* Hover: `--color-border-strong` + `--color-text`. Disabled: `--color-text-muted`
+  (used when no provider key is configured, or provider info failed to load).
+* Options come from `/api/info`; the selected value is persisted and used for
+  the next request. Server-side allowlist is authoritative.
+* Mobile: remains visible, capped at 46% of the topbar width; the conversation
+  title truncates around it.
+
+### Model Switcher (topbar)
+* A native `<select>` styled as a pill: height 26px (28px on mobile), radius
+  `--radius-pill`, 1px `--color-border`, `--color-surface` background,
+  `--font-mono` at `--fs-caption`, `--color-text-secondary` label.
+* Trailing chevron (13px) is absolutely positioned and `pointer-events: none`.
+* Hover: `--color-border-strong` + `--color-text`. Disabled: `--color-text-muted`
+  — used when no provider key is configured, or provider info failed to load.
+* Options come from `/api/info`; the selection is persisted and used for the
+  next request. The server re-validates it against its own allowlist.
+* Mobile: stays visible, capped at 46% of the topbar width; the conversation
+  title truncates around it.
+
 ### Sidebar
 * Width 268px (244px under 1024px); background `--color-canvas`;
   1px `--color-border-subtle` right border.
@@ -254,7 +278,7 @@ No stacked shadows, no coloured glows, no blur layers.
 
 | Breakpoint | Behavior |
 |---|---|
-| **< 768px** | Sidebar becomes off-canvas drawer with backdrop. Topbar shows menu. Hamburger, model badge hidden. Content padding 16px. Suggestions single column. User bubble full width. Composer radius 12px, safe-area padding. |
+| **< 768px** | Sidebar becomes off-canvas drawer with backdrop. Topbar shows the menu and the model switcher (capped at 46% width). Content padding 16px. Suggestions single column. User bubble full width. Composer radius 12px, safe-area padding. |
 | **768–1023px** | Sidebar fixed at 244px. Content column up to 860px. Message spacing reduced slightly. Everything else as desktop. |
 | **≥ 1024px** | Full 268px sidebar, 768px centred conversation column, generous whitespace, keyboard-first. |
 | **≥ 1440px** | Layout identical to desktop — the conversation column never stretches beyond 768px. |

@@ -43,8 +43,11 @@ device, so GeeAI works without accounts, databases or sign-in.
   never inherit Chat A's messages
 
 **Interface**
+- Model switcher in the topbar — pick any model from the server's allowlist;
+  the choice is remembered and used for the next reply
 - DeepSeek-inspired focus on the conversation: quiet surfaces, one accent, no
   gradients or glassmorphism
+- Settings for theme, provider/model information and clearing conversations
 - Light / dark / system themes, persisted and applied before first paint (no flash)
 - Off-canvas sidebar on mobile, keyboard shortcuts, visible focus states,
   `aria-live` status announcements
@@ -52,6 +55,9 @@ device, so GeeAI works without accounts, databases or sign-in.
 
 **Backend**
 - Provider-agnostic (`AI_PROVIDER`), Google Gemini by default
+- `GET /api/info` publishes the provider label, model allowlist and connection
+  state — the topbar switcher is driven by it, and the server re-validates
+  every requested model against that allowlist
 - Server-side validation: payload size, message count, roles, model allowlist
 - Best-effort per-IP rate limiting and upstream timeouts
 - Safe, structured errors — provider details are logged server-side, never returned

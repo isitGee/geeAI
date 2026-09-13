@@ -167,6 +167,9 @@
             stroke-linejoin="round"
           />
         </symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24">
+          <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
         <symbol id="i-chart" viewBox="0 0 24 24">
           <path d="M4 20h16M7 20V9M12 20V4M17 20v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
         </symbol>
@@ -236,7 +239,11 @@
           </button>
 
           <h1 class="topbar__title" id="topbarTitle">GeeAI</h1>
-          <span class="topbar__model" id="modelBadge">—</span>
+
+          <span class="model-switch">
+            <select class="model-switch__select" id="modelSelect" aria-label="Model"></select>
+            <svg class="icon model-switch__chevron" aria-hidden="true"><use href="#i-chevron" /></svg>
+          </span>
 
           <div class="topbar__spacer"></div>
 
@@ -348,8 +355,7 @@
           </section>
 
           <section class="field">
-            <label class="field__label" for="modelSelect">Model</label>
-            <select class="select" id="modelSelect"></select>
+            <p class="field__label">Provider</p>
             <p class="field__hint" id="modelHint"></p>
           </section>
 

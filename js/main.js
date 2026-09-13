@@ -34,7 +34,6 @@ const dom = {
   historyEmpty: document.getElementById('historyEmpty'),
   settingsBtn: document.getElementById('settingsBtn'),
   topbarTitle: document.getElementById('topbarTitle'),
-  modelBadge: document.getElementById('modelBadge'),
   themeToggle: document.getElementById('themeToggle'),
   chatScroll: document.getElementById('chatScroll'),
   emptyState: document.getElementById('emptyState'),
@@ -503,33 +502,37 @@ function closeDrawer({ restoreFocus = true } = {}) {
 /* Settings                                                                   */
 /* -------------------------------------------------------------------------- */
 
+/** Populates the topbar model switcher and the provider line in Settings. */
 function updateProviderUi() {
   const provider = state.info?.provider;
 
   if (!provider) {
-    dom.modelBadge.textContent = 'Offline';
-    dom.modelBadge.title = 'Could not load provider information';
     dom.modelSelect.disabled = true;
     dom.modelSelect.replaceChildren(new Option('Unavailable', ''));
+    dom.modelSelect.title = 'Could not load provider information';
     dom.modelHint.textContent = 'GeeAI could not reach the server to load provider information.';
     return;
   }
 
   const model = currentModel() || provider.defaultModel;
-  dom.modelBadge.textContent = provider.configured ? model : 'Not connected';
-  dom.modelBadge.title = provider.configured
-    ? `${provider.label} · ${model}`
-    : 'No AI provider key configured on the server';
+  const options = provider.configured ? provider.models : [model];
+  const signature = `${provider.name}|${provider.configured}|${options.join(',')}`;
 
-  if (dom.modelSelect.dataset.provider !== provider.name) {
-    dom.modelSelect.dataset.provider = provider.name;
-    dom.modelSelect.replaceChildren(...provider.models.map((name) => new Option(name, name)));
+  if (dom.modelSelect.dataset.signature !== signature) {
+    dom.modelSelect.dataset.signature = signature;
+    dom.modelSelect.replaceChildren(
+      ...options.map((name) => new Option(provider.configured ? name : 'Not connected', name)),
+    );
   }
+
   dom.modelSelect.value = model;
   dom.modelSelect.disabled = !provider.configured;
+  dom.modelSelect.title = provider.configured
+    ? `${provider.label} · ${model}`
+    : 'No AI provider key is configured on the server';
 
   dom.modelHint.textContent = provider.configured
-    ? `${provider.label} · responses are generated server-side and streamed to this page.`
+    ? `${provider.label} · ${model}. Responses are generated server-side and streamed to this page.`
     : `${provider.label} is selected, but no API key is configured on the server. Add GEMINI_API_KEY in the project environment, then reload.`;
 }
 
